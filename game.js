@@ -1,10 +1,16 @@
-var canvas = null,     ctx = null;
-var x = 50,     y = 50;
-var lastPress = null;
-var KEY_LEFT = 37,     KEY_UP = 38,     KEY_RIGHT = 39,     KEY_DOWN = 40;
-var dir = 0;
-var pause = true;
+var KEY_ENTER = 13, 
+    KEY_LEFT = 37,     
+    KEY_UP = 38,     
+    KEY_RIGHT = 39,     
+    KEY_DOWN = 40,
 
+    canvas = null,     
+    ctx = null,
+    lastPress = null,
+    pause = true,
+    x = 50,     
+    y = 50,
+    dir=0;
 
 
 window.requestAnimationFrame = (function () {
@@ -15,13 +21,26 @@ window.requestAnimationFrame = (function () {
             window.setTimeout(callback, 17);         
         }; 
 }());
+
+
+document.addEventListener('keydown', function (evt) {
+    lastPress = evt.which; 
+}, false);
  
 function paint(ctx) {     
+    // Clean Canvas
     ctx.fillStyle = '#000';     
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    //Draw square
     ctx.fillStyle = '#0f0';     
     ctx.fillRect(x, y, 10, 10);
-    ctx.fillText('Last Press: ' + lastPress, 0, 20);
+
+    //Debug last key pressed
+    ctx.fillText = '#fff';
+    //ctx.fillText('Last Press: ' + lastPress, 0, 20);
+
+    //Draw pause
     if (pause) {         
         ctx.textAlign = 'center';         
         ctx.fillText('PAUSE', 150, 75);         
@@ -72,30 +91,36 @@ function act(){
         if (y < 0) {         
         y = canvas.height;     
         }
-    } 
-}
-
-function run() {     
-    setTimeout(run, 50);     
-    act();     
+    }
+    
+    // Pause/Unpause     
+    if (lastPress == KEY_ENTER) {         
+        pause = !pause;         
+        lastPress = null;     
+    }
 }
 
 function repaint() {     
     window.requestAnimationFrame(repaint);     
     paint(ctx); 
 } 
+
+function run() {     
+    setTimeout(run, 50);     
+    act();     
+}
+
  
-function init() {     
+function init() {
+    // Get canvas and context      
     canvas = document.getElementById('canvas');     
-    ctx = canvas.getContext('2d');     
+    ctx = canvas.getContext('2d');
+    
+    //Start game
     run(); 
     repaint();
 }
 
-
-document.addEventListener('keydown', function (evt) {
-         lastPress = evt.which; 
-}, false);
  
 window.addEventListener('load', init, false);
 
