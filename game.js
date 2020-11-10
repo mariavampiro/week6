@@ -161,7 +161,7 @@
         //ctx.fillText('Last Press: ' + lastPress, 0, 20);
 
         // Draw score   
-        //ctx.fillText('Score: ' + score, 0, 10);
+        ctx.fillText('Score: ' + score, 0, 10);
 
         //Draw pause
         if (pause) {         
@@ -174,7 +174,7 @@
             ctx.textAlign = 'left';     
         }
 
-        ctx.fillText('FPS: ' + FPS, 10, 10); 
+        //ctx.fillText('FPS: ' + FPS, 10, 10); 
     }
 
     function act() {
@@ -280,7 +280,7 @@
     }
 
     function run() {
-        window.requestAnimationFrame(run);
+        setTimeout(run,50);
         var now = Date.now(),         
             deltaTime = (now - lastUpdate) / 1000;     
         if (deltaTime > 1) {         
