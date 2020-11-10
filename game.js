@@ -161,7 +161,7 @@
         //ctx.fillText('Last Press: ' + lastPress, 0, 20);
 
         // Draw score   
-        ctx.fillText('Score: ' + score, 0, 10);
+        //ctx.fillText('Score: ' + score, 0, 10);
 
         //Draw pause
         if (pause) {         
@@ -173,6 +173,8 @@
             }         
             ctx.textAlign = 'left';     
         }
+
+        ctx.fillText('FPS: ' + FPS, 10, 10); 
     }
 
     function act() {
