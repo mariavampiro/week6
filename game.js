@@ -30,6 +30,14 @@
         frames = 0,     
         acumDelta = 0;
 
+    function resize(){
+        var w = window.innerWidth / canvas.width;             
+        var h = window.innerHeight / canvas.height;             
+        var scale = Math.min(h, w);
+        canvas.style.width = (canvas.width * scale) + 'px';             
+        canvas.style.height = (canvas.height * scale) + 'px';
+    }
+
 
     window.requestAnimationFrame = (function () {
         return window.requestAnimationFrame ||
@@ -328,8 +336,10 @@
         //Start game
         run();
         repaint();
+        resize();
     }
 
 
     window.addEventListener('load', init, false);
+    window.addEventListener('resize', resize, false);
 }(window));
