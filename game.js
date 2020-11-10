@@ -46,10 +46,10 @@
     }, false);
 
     function Rectangle(x, y, width, height) {
-        this.x = (x === undefined) ? 0 : x;
+        this.x = (x === undefined) ? 0 : x; //analiza x: asigna 0 si es indefinido o asigna el valor de x en caso contrario
         this.y = (y === undefined) ? 0 : y;
         this.width = (width === undefined) ? 0 : width;
-        this.height = (height === undefined) ? this.width : height;
+        this.height = (height === undefined) ? this.width : height; //si el alto es indefinido, le asigna el ancho, y queda un cuadrado
 
         /* this.intersects = function (rect) {
             if (rect == null) {
