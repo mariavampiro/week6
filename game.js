@@ -30,7 +30,9 @@
         lastUpdate = 0,     
         FPS = 0,     
         frames = 0,     
-        acumDelta = 0
+        acumDelta = 0,
+
+        error = null;
 
     function resize(){
         var w = window.innerWidth / canvas.width;             
@@ -347,7 +349,6 @@
 
         // Create extra
         extra = new Rectangle(80,80,10,10);
-        console.log(extra);
 
         // Create walls     
         /*wall.push(new Rectangle(100, 50, 10, 10));     
@@ -360,6 +361,42 @@
         repaint();
         resize();
     }
+
+    // GET
+
+    function main(){
+        //request.open('GET', url, true);
+
+        fetch('http://www.jsonplaceholder.com?score=100')
+            .then(() => console.log('Score sent successfully'))
+            .catch(() => console.log('Error trying to send the score'))
+        
+        /*request.onreadystatechange = (event) => {
+            if(request.readyState === 4){
+                if (request.status >= 200 && request.status < 400){
+                    let score = request.responseText;
+                    let data = JSON.parse(score);
+                    callback(data, null);
+                }else{
+                    error(null, "Error trying to send the score");
+                }
+            }
+        }*/
+        //request.send();
+    }
+
+    /*function callback(data,error){
+        if (error){
+            console.log(error);
+        }else{
+            data.results.forEach(item => {
+                console.log(item.name);
+                console.log('Score sent successfully');
+            });
+        }
+    }*/
+
+    main();
 
 
     window.addEventListener('load', init, false);
