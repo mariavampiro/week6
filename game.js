@@ -1,5 +1,6 @@
 /*jslint bitwise:true, es5: true */ 
-(function (window, undefined) {     
+(function (window, undefined) { 
+    /*RequestAnimationFrame*/    
         'use strict';
 
     var KEY_ENTER = 13,
@@ -22,7 +23,12 @@
         iBody = new Image(),     
         iFood = new Image(),     
         aEat = new Audio(),     
-        aDie = new Audio();
+        aDie = new Audio(),
+
+        lastUpdate = 0,     
+        FPS = 0,     
+        frames = 0,     
+        acumDelta = 0;
 
 
     window.requestAnimationFrame = (function () {
@@ -272,8 +278,24 @@
     }
 
     function run() {
-        setTimeout(run, 50);
+        window.requestAnimationFrame(run);
+        var now = Date.now(),         
+            deltaTime = (now - lastUpdate) / 1000;     
+        if (deltaTime > 1) {         
+            deltaTime = 0;     
+        }     
+        lastUpdate = now;
+
+        frames += 1;     
+        acumDelta += deltaTime;
+        if (acumDelta > 1) {         
+            FPS = frames;         
+            frames = 0;         
+            acumDelta -= 1;     
+        }
+        
         act();
+        paint(ctx);
     }
 
     function init() {
